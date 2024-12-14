@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TabCliente">
+
+    <!-- Contenedor principal con padding -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="top">
+
+        <!-- Título de la sección -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selecciona el medio de pago"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <!-- RadioGroup para seleccionar medio de pago -->
+        <RadioGroup
+            android:id="@+id/radioGroupPago"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <!-- Opción de pago en efectivo -->
+            <RadioButton
+                android:id="@+id/rbEfectivo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Efectivo"
+                android:layout_marginEnd="16dp" />
+
+            <!-- Opción de pago con tarjeta -->
+            <RadioButton
+                android:id="@+id/rbTarjeta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tarjeta" />
+        </RadioGroup>
+
+        <!-- Título de la sección -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selecciona el tipo de documento"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp" />
+
+        <!-- RadioGroup para seleccionar medio de pago -->
+        <RadioGroup
+            android:id="@+id/radioGroupTipoDocumento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <!-- Opción de pago en efectivo -->
+            <RadioButton
+                android:id="@+id/rbBoleta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Boleta"
+                android:layout_marginEnd="16dp" />
+
+            <!-- Opción de pago con tarjeta -->
+            <RadioButton
+                android:id="@+id/rbFactura"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Factura" />
+        </RadioGroup>
+
+        <!-- Título para la búsqueda del cliente -->
+        <TextView
+            android:id="@+id/tvBuscarCliente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buscar Cliente"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="16dp"
+            >
+
+            <!-- Campo para mostrar el cliente seleccionado -->
+            <EditText
+                android:id="@+id/etCliente"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Seleccionar Cliente"
+                android:focusable="false"
+            android:clickable="true"
+            android:inputType="none" />
+
+            <!-- Botón de búsqueda (ícono de lupa) -->
+            <ImageButton
+                android:id="@+id/btnBuscarCliente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_search"
+                android:background="@drawable/button_rounded"
+                android:contentDescription="Buscar Cliente"
+                android:padding="10dp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Seleccionar direccion"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Spinner
+                android:id="@+id/spinnerDirecciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp" />
+
+        </LinearLayout>
+        <!-- Spinner para seleccionar la dirección -->
+    </LinearLayout>
+
+
+
+</FrameLayout>

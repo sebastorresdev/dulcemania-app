@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- AutoCompleteTextView para buscar producto -->
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteProducto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Buscar producto"
+        android:dropDownHeight="wrap_content"
+        android:padding="8dp"/>
+
+    <!-- EditText para ingresar cantidad -->
+    <EditText
+        android:id="@+id/editCantidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Cantidad"
+        android:inputType="number"
+        android:padding="8dp"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Botón para agregar el producto -->
+    <Button
+        android:id="@+id/btnAgregar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agregar"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>
