@@ -1,10 +1,12 @@
 package com.example.dulcemaniaapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -15,6 +17,10 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.dulcemaniaapp.databinding.FragmentTabClienteBinding
+import com.example.dulcemaniaapp.models.Cliente
+import com.example.dulcemaniaapp.models.Direccion
+import com.example.dulcemaniaapp.models.Producto
+import com.example.dulcemaniaapp.services.ClienteService
 import com.example.dulcemaniaapp.viewmodels.ClienteViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -26,6 +32,14 @@ class TabCliente : Fragment() {
     private lateinit var btnBuscarCliente: ImageButton
     private lateinit var clienteViewModel: ClienteViewModel
 
+    private lateinit var clienteService: ClienteService
+
+    private val listaClientes = mutableListOf<Cliente>()
+    private val direccionClientes = mutableListOf<Direccion>()
+
+    private lateinit var adapterSpinner: ArrayAdapter<String>
+
+    private val direcciones = mutableListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,16 +48,17 @@ class TabCliente : Fragment() {
 
         bindingCliente = FragmentTabClienteBinding.inflate(inflater, container, false)
 
+        // inicializamos el servicio
+        clienteService = ClienteService()
+
         etCliente = bindingCliente.etCliente
         spinnerDirecciones = bindingCliente.spinnerDirecciones
         btnBuscarCliente = bindingCliente.btnBuscarCliente
 
+        // Referencia al ClienteViewModel
         clienteViewModel = ViewModelProvider(requireActivity()).get(ClienteViewModel::class.java)
-        // Inflar el layout para este fragmento
 
-
-
-        // Similar con el spinner de direcciones...
+        // Evento para el spinnerDirecciones
         spinnerDirecciones.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 clienteViewModel.direccionSeleccionada.value = position != AdapterView.INVALID_POSITION
@@ -54,9 +69,22 @@ class TabCliente : Fragment() {
             }
         })
 
-
         // AQUI SE DEBE CONSUMIR LA API
         val clientes = listOf("Cliente 1", "Cliente 2", "Cliente 3", "Cliente 4")
+
+        // Llamar al servicio para obtener clientes
+        clienteService.obtenerClientes { clientes, error ->
+            if (clientes != null) {
+                // Procesar lista de clientes
+                Log.d("CLIENTES", clientes.toString())
+                listaClientes.clear()
+                listaClientes.addAll(clientes)
+
+            } else {
+                // Manejar el error
+                Log.e("ERROR", error ?: "Error desconocido")
+            }
+        }
 
 
         btnBuscarCliente.setOnClickListener {
@@ -64,7 +92,9 @@ class TabCliente : Fragment() {
             val autoCompleteTextView = AutoCompleteTextView(requireContext())
 
             // Configurar el adaptador para el AutoCompleteTextView
-            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, clientes)
+            val nombreClientes = listaClientes.map { c -> c.razonSocial }
+
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, nombreClientes)
             autoCompleteTextView.setAdapter(adapter)
 
             // Crear el AlertDialog
@@ -76,7 +106,17 @@ class TabCliente : Fragment() {
                     if (selectedCliente.isNotEmpty()) {
                         // Mostrar el cliente seleccionado en el EditText
                         etCliente.setText(selectedCliente)
+                        var d = obtenerDireccionPorNombreCliente(etCliente.text.toString()).map { d -> d.direccion }
+
+                        direcciones.clear()
+                        direcciones.addAll(d)
+                        adapterSpinner.notifyDataSetChanged()
                         clienteViewModel.clienteSeleccionado.value = true
+
+                        if (direcciones.isNotEmpty()) {
+                            spinnerDirecciones.setSelection(0)
+                        }
+
                     } else {
                         Toast.makeText(requireContext(), "Por favor selecciona un cliente", Toast.LENGTH_SHORT).show()
                         clienteViewModel.clienteSeleccionado.value = false
@@ -88,23 +128,18 @@ class TabCliente : Fragment() {
                 .show()
         }
 
-        // Lista de direcciones de ejemplo (esto debería venir de la base de datos o de un servidor)
-        val direcciones = listOf("Dirección 1", "Dirección 2", "Dirección 3", "Dirección 4")
-
         // Crear un ArrayAdapter para llenar el Spinner con las direcciones
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, direcciones)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        adapterSpinner = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, direcciones)
+        adapterSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         // Asignar el adaptador al Spinner
-        spinnerDirecciones.adapter = adapter
+        spinnerDirecciones.adapter = adapterSpinner
 
         return bindingCliente.root
 
     }
 
-    fun isClienteDataComplete(): Boolean {
-        val clienteName = etCliente.text.toString().trim()
-        // Verifica si todos los campos necesarios están completos
-        return clienteName.isNotEmpty()
+    private fun obtenerDireccionPorNombreCliente(nombre:String): List<Direccion> {
+        return listaClientes.find { c-> c.razonSocial == nombre }!!.direcciones.toList()
     }
 }

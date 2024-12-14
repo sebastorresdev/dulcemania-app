@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dulcemaniaapp.adapters.ProductoAdapter
@@ -26,18 +27,18 @@ import com.example.dulcemaniaapp.viewmodels.ProductoViewModel
 class TabProducto : Fragment() {
 
     private lateinit var bindingProducto: FragmentTabProductoBinding
+
     private lateinit var clienteViewModel: ClienteViewModel
+    private lateinit var productoViewModel: ProductoViewModel
 
     private lateinit var productoService: ProductoService
 
-    private var sumaTotal = 0.0
     private lateinit var btnGuardarPedido: Button
     private lateinit var recyclerProductos: RecyclerView
     private lateinit var cantidadTotal : TextView
     private lateinit var montoTotal : TextView
-    private var productosSeleccionados = false
 
-    private lateinit var productoViewModel: ProductoViewModel
+    private var productosSeleccionados = false
 
     private val productosItems = mutableListOf<ItemProducto>()
     private val listaProductos = mutableListOf<Producto>()
@@ -80,6 +81,13 @@ class TabProducto : Fragment() {
         productoViewModel.cantidadTotal.observe(viewLifecycleOwner) { nuevaCantidadTotal ->
             // Actualiza el total de cantidad en la UI
             cantidadTotal.text = "Cantidad Total: $nuevaCantidadTotal"
+        }
+
+        // Agregamos un evento al boton guardar
+        bindingProducto.btnGuardarPedido.setOnClickListener {
+            Toast.makeText(context, "Pedido registrado", Toast.LENGTH_LONG).show()
+            val navController = findNavController()
+            navController.navigate(R.id.nav_pedido)
         }
 
 
@@ -138,6 +146,7 @@ class TabProducto : Fragment() {
 
                     productoViewModel.actualizarTotales(productosItems)
 
+                    productosSeleccionados = true
                     validarGuardarPedido()
                     alertDialog.dismiss()
                 }
@@ -151,10 +160,6 @@ class TabProducto : Fragment() {
         btnGuardarPedido.isEnabled = clienteViewModel.clienteSeleccionado.value == true &&
                 clienteViewModel.direccionSeleccionada.value == true &&
                 productosSeleccionados
-    }
-
-    private fun calcularCantidadTotal(item: List<ItemProducto>): Int {
-        return item.map { p -> p.cantidad }.sum()
     }
 
     private fun obtenerPrecioPorId(id : Int) : Double {
