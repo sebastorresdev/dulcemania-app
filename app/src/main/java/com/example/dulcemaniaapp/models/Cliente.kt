@@ -8,4 +8,8 @@ data class Cliente(
     val telefono: String,
     val correo: String,
     val direcciones: List<Direccion>
-)
+){
+    override fun toString(): String {
+        return razonSocial
+    }
+}

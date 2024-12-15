@@ -1,29 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.pedido.PedidoFragment">
+    tools:context=".ui.producto.ProductoFragment">
 
-    <!-- RecyclerView -->
+    <!-- RecyclerView para mostrar productos -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewPedidos"
+        android:id="@+id/recyclerViewProductos"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnBuscarProducto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- FloatingActionButton -->
+    <!-- FloatingActionButton para agregar un nuevo producto, centrado en la parte inferior -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnCrearPedido"
+        android:id="@+id/btnBuscarProducto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         app:srcCompat="@drawable/ic_add" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

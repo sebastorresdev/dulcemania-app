@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".ui.pedido.PedidoFragment">
+
+    <!-- Título Buscar Producto -->
+    <TextView
+        android:id="@+id/tvBuscarProducto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Buscar Producto"
+        android:textSize="16sp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Campo para buscar productos -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilBuscarProducto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Buscar Producto"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintTop_toBottomOf="@id/tvBuscarProducto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <AutoCompleteTextView
+            android:id="@+id/autBuscarProducto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Campo para ingresar cantidad -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilCantidad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Cantidad"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintTop_toBottomOf="@id/tilBuscarProducto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <EditText
+            android:id="@+id/etCantidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Botón para agregar el pedido -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAgregarProducto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agregar Pedido"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tilCantidad"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

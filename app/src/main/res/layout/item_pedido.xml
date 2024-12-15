@@ -1,0 +1,86 @@
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Título -->
+        <TextView
+            android:id="@+id/tipoDocumento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Boleta - RUC: 47931526"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Información del cliente -->
+        <TextView
+            android:id="@+id/nombreCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cliente: Sebastian Torres"
+            android:textSize="16sp" />
+
+        <!-- Estado del pedido -->
+        <TextView
+            android:id="@+id/estado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estado: Pendiente"
+            android:textSize="16sp" />
+
+        <!-- Total -->
+        <TextView
+            android:id="@+id/total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total: S/ 0.00"
+            android:textSize="16sp" />
+
+        <!-- Botones de acción -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_marginTop="8dp">
+
+            <!-- Botón Ver detalle -->
+            <Button
+                android:id="@+id/btnVerDetalle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?attr/materialIconButtonFilledTonalStyle"
+                app:icon="@drawable/ic_detail"
+                android:visibility="visible" />
+
+            <!-- Botón Editar -->
+            <Button
+                android:id="@+id/btnEditar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?attr/materialIconButtonFilledTonalStyle"
+                app:icon="@drawable/ic_edit"
+                android:visibility="visible" />
+
+            <!-- Botón Eliminar -->
+            <Button
+                android:id="@+id/btnEliminar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?attr/materialIconButtonFilledTonalStyle"
+                app:icon="@drawable/ic_delete"
+                android:visibility="visible" />
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

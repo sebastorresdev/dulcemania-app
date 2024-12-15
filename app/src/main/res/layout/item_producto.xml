@@ -60,26 +60,47 @@
                     android:textSize="14sp"
                     android:gravity="start"
                     android:layout_marginTop="4dp" />
+
+                <!-- Monto -->
+                <TextView
+                    android:id="@+id/tvMonto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Monto: S/"
+                    android:textSize="14sp"
+                    android:gravity="start"
+                    android:layout_marginTop="4dp" />
             </LinearLayout>
+
+            <!-- Botón para disminuir cantidad -->
+            <ImageButton
+                android:id="@+id/btnDisminuir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_remove"
+                android:contentDescription="Disminuir cantidad"
+                android:background="@drawable/button_rounded"
+                android:padding="8dp"
+                android:layout_marginEnd="8dp" />
+
+            <!-- Botón para agregar más cantidad -->
+            <ImageButton
+                android:id="@+id/btnAdicionar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add"
+                android:contentDescription="Agregar cantidad"
+                android:background="@drawable/button_rounded"
+                android:padding="8dp"
+                android:layout_marginEnd="8dp" />
 
             <!-- Botón para eliminar -->
             <ImageButton
                 android:id="@+id/btnEliminarProducto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:src="@drawable/ic_delete"
                 android:contentDescription="Eliminar producto"
-                android:background="@drawable/button_rounded"
-                android:padding="8dp" />
-
-            <!-- Botón para agregar más cantidad -->
-            <ImageButton
-                android:id="@+id/btnAgregarCantidad"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_add"
-                android:contentDescription="Agregar cantidad"
                 android:background="@drawable/button_rounded"
                 android:padding="8dp" />
         </LinearLayout>

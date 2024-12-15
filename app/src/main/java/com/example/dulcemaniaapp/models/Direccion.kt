@@ -6,3 +6,8 @@ data class Direccion(
     val distrito: String,
     val referencia: String
 )
+{
+    override fun toString(): String {
+        return direccion
+    }
+}

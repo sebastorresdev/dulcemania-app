@@ -13,4 +13,8 @@ data class Producto(
     val codigoInterno: String,
     val codigoBarras: String,
     val unidadMedida: String
-)
+){
+    override fun toString(): String {
+        return descripcion
+    }
+}

@@ -1,8 +1,9 @@
 package com.example.dulcemaniaapp.models
 
-data class ItemProducto(
+data class DetalleProducto(
     var id: Int,
     val nombre: String,
     var cantidad: Int,
-    val precio: Double
+    var precioUnitario: Double,
+    var precioTotal: Double
 )
