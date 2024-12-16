@@ -1,11 +1,9 @@
-package com.example.dulcemaniaapp.ui.producto
+package com.example.dulcemaniaapp.ui.pedido
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dulcemaniaapp.dtos.CreateDetallePedido
-import com.example.dulcemaniaapp.models.Cliente
 import com.example.dulcemaniaapp.models.DetalleProducto
-import com.example.dulcemaniaapp.models.Producto
 
 class ProductoViewModel : ViewModel() {
     val productosSeleccionados = MutableLiveData<List<DetalleProducto>>()

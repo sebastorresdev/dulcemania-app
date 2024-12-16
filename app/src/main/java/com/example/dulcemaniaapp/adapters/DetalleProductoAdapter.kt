@@ -1,7 +1,6 @@
 package com.example.dulcemaniaapp.adapters
 
 import android.view.LayoutInflater
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dulcemaniaapp.R

@@ -1,4 +1,4 @@
-package com.example.dulcemaniaapp.ui.producto
+package com.example.dulcemaniaapp.ui.pedido
 
 import android.app.AlertDialog
 import androidx.fragment.app.viewModels
@@ -17,13 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dulcemaniaapp.R
 import com.example.dulcemaniaapp.adapters.DetalleProductoAdapter
 import com.example.dulcemaniaapp.databinding.FragmentProductoBinding
-import com.example.dulcemaniaapp.models.Cliente
 import com.example.dulcemaniaapp.models.DetalleProducto
-import com.example.dulcemaniaapp.models.Direccion
 import com.example.dulcemaniaapp.models.Producto
-import com.example.dulcemaniaapp.services.ClienteService
 import com.example.dulcemaniaapp.services.ProductoService
-import com.example.dulcemaniaapp.ui.cliente.ClienteViewModel
 
 class ProductoFragment : Fragment() {
 

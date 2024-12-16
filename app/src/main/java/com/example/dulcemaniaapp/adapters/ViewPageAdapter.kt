@@ -2,11 +2,11 @@ package com.example.dulcemaniaapp.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.dulcemaniaapp.ui.cliente.ClienteFragment
-import com.example.dulcemaniaapp.ui.producto.ProductoFragment
+import com.example.dulcemaniaapp.ui.pedido.SeleccionarClienteFragment
+import com.example.dulcemaniaapp.ui.pedido.ProductoFragment
 
 class ViewPageAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
-    private val fragments = listOf(ClienteFragment(), ProductoFragment())
+    private val fragments = listOf(SeleccionarClienteFragment(), ProductoFragment())
 
     override fun getItemCount(): Int {
         return fragments.size

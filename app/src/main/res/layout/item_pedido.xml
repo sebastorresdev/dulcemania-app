@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 style="?attr/materialIconButtonFilledTonalStyle"
                 app:icon="@drawable/ic_edit"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <!-- Botón Eliminar -->
             <Button

@@ -14,23 +14,13 @@ import com.example.dulcemaniaapp.adapters.PedidoAdapter
 import com.example.dulcemaniaapp.databinding.FragmentPedidoBinding
 import com.example.dulcemaniaapp.models.Pedido
 import com.example.dulcemaniaapp.services.PedidoService
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 class PedidoFragment : Fragment() {
 
     private lateinit var binding: FragmentPedidoBinding
     private val pedidos = mutableListOf<Pedido>()
-
-    companion object {
-        fun newInstance() = PedidoFragment()
-    }
-
-    private val viewModel: PedidoViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // TODO: Use the ViewModel
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,8 +42,8 @@ class PedidoFragment : Fragment() {
 
     fun obtenerPedidos() {
         val pedidoService = PedidoService()
-
-        pedidoService.obtenerPedidos() { data, error ->
+        val identificador = Firebase.auth.currentUser?.uid.toString()
+        pedidoService.obtenerPedidos(identificador) { data, error ->
             if (data != null) {
                 // Procesar lista de clientes
                 //Log.d("CLIENTES", clientes.toString())
@@ -69,6 +59,18 @@ class PedidoFragment : Fragment() {
 
     fun initRecyclerView() {
         binding.recyclerViewPedidos.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerViewPedidos.adapter = PedidoAdapter(pedidos)
+        binding.recyclerViewPedidos.adapter = PedidoAdapter(pedidos, { verDetalle(it) },{eliminarPedido(it)})
+    }
+
+    fun eliminarPedido(pedido: Pedido) {
+        val index = pedidos.indexOfFirst { it.id == pedido.id }
+        if (index != -1) {
+            pedidos.removeAt(index)
+            binding.recyclerViewPedidos.adapter?.notifyItemRemoved(index)
+        }
+    }
+
+    fun verDetalle(pedido: Pedido) {
+
     }
 }

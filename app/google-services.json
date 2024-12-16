@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "380759270175",
+    "project_id": "dulcemania-b64eb",
+    "storage_bucket": "dulcemania-b64eb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380759270175:android:da66d324d4459c4f02062a",
+        "android_client_info": {
+          "package_name": "com.example.dulcemaniaapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "380759270175-9073m6m2fgnhtmh3mru8a73cp9sh3uu4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dulcemaniaapp",
+            "certificate_hash": "39268d5b72d7b03fc0c5faee0a8a08112ca758e5"
+          }
+        },
+        {
+          "client_id": "380759270175-99tr4b3kgunrmm27mj5jcniatvb9kov5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxxDarU5kqBU9yA7P6cg3hw9Mfynlb8O8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "380759270175-99tr4b3kgunrmm27mj5jcniatvb9kov5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

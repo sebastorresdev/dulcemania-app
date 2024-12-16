@@ -32,14 +32,14 @@ class PedidoService {
         })
     }
 
-    fun obtenerPedidos(callback: (List<Pedido>?, String?) -> Unit) {
-        RetrofitInstance.retrofitService.getPedidos().enqueue(object : Callback<List<Pedido>> {
-            override fun onResponse(call: Call<List<Pedido>>, response: Response<List<Pedido>>
-            ) {
+    fun obtenerPedidos(identificador: String, callback: (List<Pedido>?, String?) -> Unit) {
+        // Llamar al servicio Retrofit pasándole el idUsuario
+        RetrofitInstance.retrofitService.getPedidos(identificador).enqueue(object : Callback<List<Pedido>> {
+            override fun onResponse(call: Call<List<Pedido>>, response: Response<List<Pedido>>) {
                 if (response.isSuccessful) {
-                    val listaClientes = response.body()
-                    if (listaClientes != null) {
-                        callback(listaClientes, null)
+                    val listaPedidos = response.body()
+                    if (listaPedidos != null) {
+                        callback(listaPedidos, null)
                     } else {
                         callback(null, "La respuesta de la API no contiene los pedidos.")
                     }
@@ -54,4 +54,5 @@ class PedidoService {
             }
         })
     }
+
 }

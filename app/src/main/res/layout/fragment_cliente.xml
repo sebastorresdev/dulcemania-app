@@ -1,138 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.cliente.ClienteFragment">
 
-    <ScrollView
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewClientes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="top">
-
-            <!-- Título de la sección -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Selecciona el medio de pago"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
-
-            <!-- RadioGroup para seleccionar medio de pago -->
-            <RadioGroup
-                android:id="@+id/radioGroupPago"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="16dp">
-
-                <RadioButton
-                    android:id="@+id/rbEfectivo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Efectivo"
-                    android:layout_marginEnd="16dp" />
-
-                <RadioButton
-                    android:id="@+id/rbTarjeta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Tarjeta" />
-            </RadioGroup>
-
-            <!-- Título de la sección -->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Selecciona el tipo de documento"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="8dp" />
-
-            <!-- RadioGroup para seleccionar tipo de documento -->
-            <RadioGroup
-                android:id="@+id/radioGroupTipoDocumento"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="16dp">
-
-                <RadioButton
-                    android:id="@+id/rbBoleta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Boleta"
-                    android:layout_marginEnd="16dp" />
-
-                <RadioButton
-                    android:id="@+id/rbFactura"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Factura" />
-            </RadioGroup>
-
-            <!-- Título para la búsqueda del cliente -->
-            <TextView
-                android:id="@+id/tvBuscarCliente"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Buscar Cliente"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp" />
-
-            <!-- Campo de texto para búsqueda -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Cliente"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_marginBottom="16dp">
-
-                <AutoCompleteTextView
-                    android:id="@+id/autClientes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Título para la búsqueda del cliente -->
-            <TextView
-                android:id="@+id/tvBuscarDireccion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Buscar Dirección"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp" />
-
-            <!-- Spinner para direcciones -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Direccion"
-                android:layout_marginBottom="16dp"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-                <AutoCompleteTextView
-                    android:id="@+id/autoDirecciones"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Botón para crear pedido -->
-            <Button
-                android:id="@+id/btnCrearPedido"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Crear Pedido"
-                android:layout_marginTop="16dp" />
-
-        </LinearLayout>
-    </ScrollView>
-</FrameLayout>
+    <!-- FloatingActionButton -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnCrearCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:srcCompat="@drawable/ic_add" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,23 +10,24 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dulcemaniaapp.R
+import com.example.dulcemaniaapp.adapters.ClienteAdapter
+import com.example.dulcemaniaapp.adapters.PedidoAdapter
 import com.example.dulcemaniaapp.databinding.FragmentClienteBinding
 import com.example.dulcemaniaapp.dtos.CreatePedido
 import com.example.dulcemaniaapp.models.Cliente
 import com.example.dulcemaniaapp.models.Direccion
 import com.example.dulcemaniaapp.services.ClienteService
 import com.example.dulcemaniaapp.services.PedidoService
-import com.example.dulcemaniaapp.ui.producto.ProductoViewModel
+import com.example.dulcemaniaapp.ui.pedido.ProductoViewModel
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 
 class ClienteFragment : Fragment() {
 
     private lateinit var binding: FragmentClienteBinding
-    private lateinit var clienteViewModel: ClienteViewModel
-    private lateinit var productoViewModel: ProductoViewModel
     private val clientes = mutableListOf<Cliente>()
-    private val direcciones = mutableListOf<Direccion>()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,70 +40,19 @@ class ClienteFragment : Fragment() {
         // obtenemos los clientes desde la api
         obtenerClientes()
 
-        // Referencia al ClienteViewModel
-        clienteViewModel = ViewModelProvider(requireActivity()).get(ClienteViewModel::class.java)
 
-        productoViewModel = ViewModelProvider(requireActivity()).get(ProductoViewModel::class.java)
-
-        // Registramos el evento click de button guardar pedido
-        binding.btnCrearPedido.setOnClickListener {
-            if (validar()) {
-
-                registrarPedido(CreatePedido(
-                    clienteViewModel.direccionSeleccionada.value!!.id,
-                    obtenerMedioPago(),
-                    1,
-                    "",
-                    obtenerTipoDocumento(),
-                    productoViewModel.obtenerCreateDetallesPedidos()))
-            }
-            else {
-                Toast.makeText( requireContext(), "mensaje", Toast.LENGTH_SHORT).show()
-            }
+        binding.btnCrearCliente.setOnClickListener {
+            val navController = findNavController()
+            navController.navigate(R.id.nav_crear_cliente)
         }
 
-        // Agregamos el adaptador a la vista
-        // Clientes
-        ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, clientes).also {
-            binding.autClientes.setAdapter(it)
-        }
-        binding.autClientes.setOnItemClickListener { adapterView, view, i, l ->
-            val cliente =  adapterView.getItemAtPosition(i) as Cliente
-
-            binding.autoDirecciones.setText("")
-            binding.autoDirecciones.clearFocus()
-
-            direcciones.clear()
-            direcciones.addAll(cliente.direcciones)
-
-            ArrayAdapter(requireContext(),android.R.layout.simple_dropdown_item_1line,direcciones).also {
-                binding.autoDirecciones.setAdapter(it)
-            }
-
-            clienteViewModel.clienteSeleccionado.value = cliente
-        }
-
-        binding.autoDirecciones.setOnItemClickListener { adapterView, view, i, l ->
-            val direccion =  adapterView.getItemAtPosition(i) as Direccion
-            clienteViewModel.direccionSeleccionada.value = direccion
-        }
 
         return binding.root
     }
 
-    private fun registrarPedido(pedido: CreatePedido) {
-        val pedidoService = PedidoService()
-        pedidoService.crearPedido(pedido) { data, error ->
-            if (data != null) {
-                Toast.makeText( requireContext(), "Pedido creado", Toast.LENGTH_SHORT).show()
-                val navController = findNavController()
-                navController.navigate(R.id.nav_pedido)
-            }
-            else {
-                Toast.makeText( requireContext(), "No se pudo crear el pedido", Toast.LENGTH_SHORT).show()
-            }
-        }
-
+    private fun initRecyclerView() {
+        binding.recyclerViewClientes.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewClientes.adapter = ClienteAdapter(clientes)
     }
 
     private fun obtenerClientes() {
@@ -113,34 +63,11 @@ class ClienteFragment : Fragment() {
             if (data != null) {
                 clientes.clear()
                 clientes.addAll(data)
+                initRecyclerView()
 
             } else {
                 Log.e("ERROR", error ?: "Error desconocido")
             }
         }
-    }
-
-    private fun obtenerMedioPago(): Int {
-        if (binding.rbEfectivo.isChecked) {
-            return 1
-        }
-        if (binding.rbTarjeta.isChecked) {
-            return 2
-        }
-        return 0
-    }
-
-    private fun obtenerTipoDocumento(): String {
-        if (binding.rbBoleta.isChecked) {
-            return "boleta"
-        }
-        if (binding.rbFactura.isChecked) {
-            return "factura"
-        }
-        return ""
-    }
-
-    private fun validar(): Boolean {
-        return true
     }
 }
